@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CAEmitterLayerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ly6-mD-DTJ">
+                                <rect key="frame" x="240" y="200" width="89" height="92"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUU-L3-3Ao">
+                                        <rect key="frame" x="0.0" y="52" width="89" height="40"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                        <state key="normal" title="Register">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADD-rI-SWc">
+                                        <rect key="frame" x="0.0" y="0.0" width="89" height="40"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                        <state key="normal" title="Sign In">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dUU-L3-3Ao" secondAttribute="bottom" id="1at-Nf-ebR"/>
+                                    <constraint firstItem="ADD-rI-SWc" firstAttribute="leading" secondItem="Ly6-mD-DTJ" secondAttribute="leading" id="Hrg-E3-772"/>
+                                    <constraint firstAttribute="trailing" secondItem="ADD-rI-SWc" secondAttribute="trailing" id="L0p-mv-Dqy"/>
+                                    <constraint firstItem="dUU-L3-3Ao" firstAttribute="top" secondItem="ADD-rI-SWc" secondAttribute="bottom" constant="12" id="Li1-6w-TIq"/>
+                                    <constraint firstAttribute="trailing" secondItem="dUU-L3-3Ao" secondAttribute="trailing" id="Mlr-b1-Lnj"/>
+                                    <constraint firstItem="dUU-L3-3Ao" firstAttribute="leading" secondItem="Ly6-mD-DTJ" secondAttribute="leading" id="bmj-Mq-4hZ"/>
+                                    <constraint firstItem="ADD-rI-SWc" firstAttribute="top" secondItem="Ly6-mD-DTJ" secondAttribute="top" id="ixH-x0-2wb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ly6-mD-DTJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cWP-E5-dYe"/>
+                            <constraint firstItem="Ly6-mD-DTJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="s6R-X0-TYs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="registerButton" destination="dUU-L3-3Ao" id="ae6-GF-Psn"/>
+                        <outlet property="signInButton" destination="ADD-rI-SWc" id="f3O-XF-4Qw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
