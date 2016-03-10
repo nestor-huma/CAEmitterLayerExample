@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ly6-mD-DTJ">
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ly6-mD-DTJ">
                                 <rect key="frame" x="240" y="200" width="89" height="92"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUU-L3-3Ao">
@@ -48,10 +48,14 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Ly6-mD-DTJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cWP-E5-dYe"/>
                             <constraint firstItem="Ly6-mD-DTJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="s6R-X0-TYs"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="QQs-aq-ZtC" appends="YES" id="tgK-lx-Rlf"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="registerButton" destination="dUU-L3-3Ao" id="ae6-GF-Psn"/>
@@ -59,6 +63,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QQs-aq-ZtC">
+                    <connections>
+                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="yVl-Hd-uF2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
         </scene>
     </scenes>

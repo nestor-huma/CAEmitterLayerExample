@@ -12,6 +12,7 @@
 		4B87A93C1C8F08AE002D7C64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B87A93A1C8F08AE002D7C64 /* Main.storyboard */; };
 		4B87A93E1C8F08AE002D7C64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B87A93D1C8F08AE002D7C64 /* Assets.xcassets */; };
 		4B87A9411C8F08AE002D7C64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B87A93F1C8F08AE002D7C64 /* LaunchScreen.storyboard */; };
+		4BCE798A1C91BF9C00EE2E60 /* CGPoint+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE79891C91BF9C00EE2E60 /* CGPoint+Distance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		4B87A93D1C8F08AE002D7C64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B87A9401C8F08AE002D7C64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B87A9421C8F08AE002D7C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BCE79891C91BF9C00EE2E60 /* CGPoint+Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGPoint+Distance.swift"; path = "CAEmitterLayerExample/CGPoint+Distance.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 		4B87A92A1C8F08AE002D7C64 = {
 			isa = PBXGroup;
 			children = (
+				4BB93C951C91ECCC00C88E97 /* Extensions */,
 				4B87A9351C8F08AE002D7C64 /* CAEmitterLayerExample */,
 				4B87A9341C8F08AE002D7C64 /* Products */,
 			);
@@ -62,6 +65,14 @@
 				4B87A9421C8F08AE002D7C64 /* Info.plist */,
 			);
 			path = CAEmitterLayerExample;
+			sourceTree = "<group>";
+		};
+		4BB93C951C91ECCC00C88E97 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4BCE79891C91BF9C00EE2E60 /* CGPoint+Distance.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +107,7 @@
 				TargetAttributes = {
 					4B87A9321C8F08AE002D7C64 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = QMJ5T4LTHY;
 					};
 				};
 			};
@@ -136,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B87A9391C8F08AE002D7C64 /* ViewController.swift in Sources */,
+				4BCE798A1C91BF9C00EE2E60 /* CGPoint+Distance.swift in Sources */,
 				4B87A9371C8F08AE002D7C64 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +262,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CAEmitterLayerExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.CAEmitterLayerExample";
@@ -260,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CAEmitterLayerExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.CAEmitterLayerExample";
@@ -286,6 +301,7 @@
 				4B87A9471C8F08AE002D7C64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
