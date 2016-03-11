@@ -27,16 +27,20 @@ class ViewController: UIViewController {
     let skyLayer = CAGradientLayer()
     let starEmitter = CAEmitterLayer()
     
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var registerButton: UIButton!
+    let maxCometCount = 5
+    
+    @IBOutlet weak var label: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsStatusBarAppearanceUpdate()
         setupSky()
         
-        configureShadow(layer: signInButton.layer)
-        configureShadow(layer: registerButton.layer)
+        label.layer.shadowOffset = CGSizeZero
+        label.layer.shadowColor = UIColor.orangeColor().CGColor
+        label.layer.shadowRadius = 10.0
+        label.layer.shadowOpacity = 1.0
     }
     
     func setupSky() {
@@ -80,13 +84,6 @@ class ViewController: UIViewController {
         starEmitter.emitterCells = [particle]
     }
     
-    func configureShadow(layer layer: CALayer) {
-        layer.shadowOffset = CGSizeZero
-        layer.shadowColor = UIColor.orangeColor().CGColor
-        layer.shadowRadius = 10.0
-        layer.shadowOpacity = 1.0
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         skyLayer.frame = view.bounds
@@ -101,24 +98,21 @@ class ViewController: UIViewController {
     
     // MARK: tap
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
-        createCometAtLocation(sender.locationInView(view))
+        let emitters = view.layer.sublayers?.filter {
+            $0.isKindOfClass(CAEmitterLayer)
+        }
+        
+        let cometsCount = emitters!.count - 1
+        
+        if cometsCount < maxCometCount {
+            createCometAtLocation(sender.locationInView(view))
+        }
     }
-    
 }
+
 
 // MARK: comets
 extension ViewController {
-    private var cometFadoutAnimation: String {
-        return "cometFadout"
-    }
-    
-    private var moveToSideAnimation: String {
-        return "moveToSide"
-    }
-    
-    //    private var ovalPathAnimation: String {
-    //
-    //    }
     
     private func createCometAtLocation(location: CGPoint) {
         let cell = CAEmitterCell()
@@ -126,11 +120,11 @@ extension ViewController {
         cell.birthRate = 500
         cell.lifetime = 1.0
         cell.lifetimeRange = 0.5
-        cell.scaleSpeed = -1.0
+        cell.scaleSpeed = -cell.scale
         cell.alphaRange = 0.5
-        cell.velocity = 150.0
+        cell.alphaSpeed = -0.5
+        cell.velocity = 50.0
         cell.yAcceleration = 200.0
-        cell.velocityRange = 1.0
         cell.emissionLongitude = CGFloat(-M_PI_2)
         cell.emissionRange = CGFloat(M_PI)
         cell.color = randomColor()
@@ -145,92 +139,70 @@ extension ViewController {
         view.layer.addSublayer(emitter)
         
         emitter.emitterCells = [cell]
-
         
-        createMoveToSideAnimation(emitterLayer: emitter)
+        createAnimations(emitterLayer: emitter)
     }
     
-    private func createMoveToSideAnimation(emitterLayer layer: CAEmitterLayer) {
-        let position = layer.emitterPosition
+    private func createAnimations(emitterLayer layer: CAEmitterLayer) {
+        // Move to side animation
         
-        let corners = [
-            CGPointZero,
-            CGPoint(x: view.bounds.width, y: 0.0),
-            CGPoint(x: 0.0, y: view.bounds.height),
-            CGPoint(x: view.bounds.width, y: view.bounds.height)
-        ]
+        let bounds = layer.bounds
         
-        let newPosition: CGPoint! = corners.minElement {
-            return position.distanceToPoint($0) < position.distanceToPoint($1)
-        }
+        let endPoint = (layer.emitterPosition.x > view.bounds.width/2) ?
+            CGPoint(x: 0.0, y: view.bounds.height/2) :
+            CGPoint(x: view.bounds.width, y: view.bounds.height/2)
         
-        let distance = position.distanceToPoint(newPosition)
+        let controlPoint = CGPoint(x: bounds.width/2, y: -bounds.height/2)
         
-        let velocity = view.bounds.width
+        let path = UIBezierPath()
+        path.moveToPoint(layer.emitterPosition)
+        path.addQuadCurveToPoint(endPoint, controlPoint: controlPoint)
         
-        let duration = CFTimeInterval(distance / velocity)
+        let moveToSide = CAKeyframeAnimation(keyPath: "emitterPosition")
+        moveToSide.path = path.CGPath
+        moveToSide.duration = 2.0
+        moveToSide.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        moveToSide.removedOnCompletion = false
+        moveToSide.fillMode = kCAFillModeForwards
         
-        let animation = CABasicAnimation(keyPath: "emitterPosition")
-        animation.fromValue = NSValue(CGPoint: position)
-        animation.toValue = NSValue(CGPoint: newPosition)
-        animation.duration = duration
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        layer.addAnimation(moveToSide, forKey: nil)
         
-        animation.setValue(layer, forKey: "layer")
-        animation.setValue(moveToSideAnimation, forKey: "name")
         
-        animation.delegate = self
+        // Move around ovel animation
+        let clockwise = endPoint.x > bounds.width/2
         
-        layer.emitterPosition = newPosition
-        layer.addAnimation(animation, forKey: nil)
-    }
-    
-    private func createOvalPathAnimation(emitter layer: CAEmitterLayer) {
+        let middleRight = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        let startAngle = atan2(endPoint.y - middleRight.y, endPoint.x - middleRight.x)
         
-        let startAngle = CGFloat(M_PI_2)
+        let endAngle = clockwise ? startAngle + CGFloat(M_PI * 2) : startAngle - CGFloat(M_PI * 2)
         
-        let minDimension = min(view.bounds.width, view.bounds.height)
-        let maxDimension = max(view.bounds.width, view.bounds.height)
+        let moveAroundOval = CAKeyframeAnimation(keyPath: "emitterPosition")
+        moveAroundOval.path = UIBezierPath(ovalInRect: layer.bounds, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise).CGPath
+        moveAroundOval.beginTime = CACurrentMediaTime() + moveToSide.duration
+        moveAroundOval.duration = 3.0
+        moveAroundOval.repeatCount = 2.5
+        moveAroundOval.calculationMode = kCAAnimationPaced
+        moveAroundOval.fillMode = kCAFillModeForwards
+        moveAroundOval.removedOnCompletion = false
         
-//        let scaleTransform = (minDimension == view.bounds.width) ?
-//            CGAffineTransformMakeScale(1.0, maxDimension / minDimension) :
-//            CGAffineTransformMakeScale(maxDimension / minDimension, 1.0)
-//        
-//        let moveTransform = (minDimension == view.bounds.width) ?
-//            CGAffineTransformMakeTranslation(0.0, -maxDimension/2) :
-//            CGAffineTransformMakeTranslation(-maxDimension/2, 0.0)
+        layer.addAnimation(moveAroundOval, forKey: nil)
         
-        let clockwise = true
         
-//        let bezierPath = UIBezierPath(arcCenter: view.center, radius: minDimension/2, startAngle: startAngle, endAngle: startAngle + CGFloat(M_PI * 2), clockwise: clockwise)
-//        bezierPath.applyTransform(scaleTransform)
-//        bezierPath.applyTransform(moveTransform)
-        let bezierPath = UIBezierPath(ovalInRect: view.bounds)
+        // Reduce birthrate animation
+        let disappear = CABasicAnimation(keyPath: "birthRate")
+        disappear.fromValue = layer.birthRate
+        disappear.toValue = 0.0
+        disappear.duration = moveAroundOval.duration * Double(moveAroundOval.repeatCount)
+        disappear.beginTime = moveAroundOval.beginTime
+        disappear.removedOnCompletion = false
+        disappear.fillMode = kCAFillModeForwards
         
-        let animation = CAKeyframeAnimation(keyPath: "emitterPosition")
-        animation.path = bezierPath.CGPath
-        animation.beginTime = CACurrentMediaTime()
-        animation.duration = 5.0
-        animation.repeatCount = Float.infinity
-        animation.calculationMode = kCAAnimationPaced
+        layer.addAnimation(disappear, forKey: nil)
         
-        layer.addAnimation(animation, forKey: nil)
-    }
-    
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        if let name = anim.valueForKey("name") as? String, let layer = anim.valueForKey("layer") as? CAEmitterLayer {
-            switch name {
-            case moveToSideAnimation:
-                createOvalPathAnimation(emitter: layer)
-                
-            case cometFadoutAnimation:
-                layer.removeFromSuperlayer()
-                
-            default:
-                break
-            }
+        delay(disappear.beginTime + disappear.duration - CACurrentMediaTime()) {
+            layer.removeFromSuperlayer()
         }
     }
-    
-    
 }
+
+
