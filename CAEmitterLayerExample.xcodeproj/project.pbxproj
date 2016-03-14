@@ -12,8 +12,8 @@
 		4B87A93C1C8F08AE002D7C64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B87A93A1C8F08AE002D7C64 /* Main.storyboard */; };
 		4B87A93E1C8F08AE002D7C64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B87A93D1C8F08AE002D7C64 /* Assets.xcassets */; };
 		4B87A9411C8F08AE002D7C64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B87A93F1C8F08AE002D7C64 /* LaunchScreen.storyboard */; };
+		4BB93C971C96B89000C88E97 /* UIBezierPath+Oval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB93C961C96B89000C88E97 /* UIBezierPath+Oval.swift */; };
 		4BCE798A1C91BF9C00EE2E60 /* CGPoint+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE79891C91BF9C00EE2E60 /* CGPoint+Distance.swift */; };
-		8449EB491C92E6970048C21E /* UIBezierPath+Oval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449EB481C92E6970048C21E /* UIBezierPath+Oval.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +24,8 @@
 		4B87A93D1C8F08AE002D7C64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B87A9401C8F08AE002D7C64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B87A9421C8F08AE002D7C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BB93C961C96B89000C88E97 /* UIBezierPath+Oval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIBezierPath+Oval.swift"; path = "CAEmitterLayerExample/UIBezierPath+Oval.swift"; sourceTree = "<group>"; };
 		4BCE79891C91BF9C00EE2E60 /* CGPoint+Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGPoint+Distance.swift"; path = "CAEmitterLayerExample/CGPoint+Distance.swift"; sourceTree = "<group>"; };
-		8449EB481C92E6970048C21E /* UIBezierPath+Oval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Oval.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +72,8 @@
 		4BB93C951C91ECCC00C88E97 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4BB93C961C96B89000C88E97 /* UIBezierPath+Oval.swift */,
 				4BCE79891C91BF9C00EE2E60 /* CGPoint+Distance.swift */,
-				8449EB481C92E6970048C21E /* UIBezierPath+Oval.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -152,8 +152,8 @@
 			files = (
 				4B87A9391C8F08AE002D7C64 /* ViewController.swift in Sources */,
 				4BCE798A1C91BF9C00EE2E60 /* CGPoint+Distance.swift in Sources */,
+				4BB93C971C96B89000C88E97 /* UIBezierPath+Oval.swift in Sources */,
 				4B87A9371C8F08AE002D7C64 /* AppDelegate.swift in Sources */,
-				8449EB491C92E6970048C21E /* UIBezierPath+Oval.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
